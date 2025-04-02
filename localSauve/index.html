@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Une application qui fonctionne hors ligne</title>
+    <script src="app.js" defer></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+        form { max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; }
+        input, textarea { width: 100%; padding: 10px; margin: 5px 0; border: 1px solid #ccc; border-radius: 5px; }
+        button { background: blue; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer; }
+        button:disabled { background: gray; }
+    </style>
+</head>
+<body>
+
+    <h2>Data entry</h2>
+    <form id="dataForm">
+        <input type="text" id="name" placeholder="Name" required>
+        <input type="email" id="email" placeholder="email" required>
+        <textarea id="message" placeholder="message" required></textarea>
+        <button type="submit">Send</button>
+    </form>
+
+    <p id="status"></p>
+
+
+<script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker
+            .register("./sw.js")
+            .then((reg) => console.log("Service Worker registered!", reg))
+            .catch((err) => console.log("Service Worker registration failed:", err));
+    });
+}
+
+</script>
+
+</body>
+</html>
